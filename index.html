@@ -2,87 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Digital Playing Card</title>
-    <style>
-        /* 1. The "Table" background */
-        body {
-            background-color: #1a472a; /* Classic poker table green */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Georgia', serif;
-        }
-
-        /* 2. The Card Body */
-        .card {
-            width: 250px;
-            height: 350px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            position: relative; /* This allows us to move corners easily */
-            color: #d12d36; /* Classic card red */
-        }
-
-        /* 3. Common Style for Corner Symbols */
-        .corner {
-            position: absolute;
-            text-align: center;
-            line-height: 0.9;
-            padding: 10px;
-        }
-
-        .top-left {
-            top: 5px;
-            left: 5px;
-        }
-
-        .bottom-right {
-            bottom: 5px;
-            right: 5px;
-            transform: rotate(180deg); /* Flip it upside down */
-        }
-
-        .rank {
-            font-size: 32px;
-            font-weight: bold;
-            display: block;
-        }
-
-        .suit-small {
-            font-size: 24px;
-        }
-
-        /* 4. The Big Center Symbol */
-        .center-suit {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 120px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Card Deck</title>
+   
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="card">
-        <!-- Top Left Corner -->
-        <div class="corner top-left">
-            <span class="rank">A</span>
-            <span class="suit-small">&hearts;</span>
-        </div>
-
-        <!-- Big Center Heart -->
-        <div class="center-suit">&hearts;</div>
-
-        <!-- Bottom Right Corner (Upside Down) -->
-        <div class="corner bottom-right">
-            <span class="rank">A</span>
-            <span class="suit-small">&hearts;</span>
-        </div>
+    <div class="controls">
+        <h1>Digital Deck</h1>
+        <button id="draw-btn" onclick="drawCard()">Draw a Card</button>
     </div>
 
+    <div id="deck-container" class="deck-container">
+        <!-- New cards will appear here dynamically -->
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
