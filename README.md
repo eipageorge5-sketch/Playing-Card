@@ -27,4 +27,4 @@ A sleek, responsive web-based card game built with **HTML5, CSS3, and Vanilla Ja
 > "A responsive web component featuring a realistic playing card design for digital games."
 
 ---
-Developed with ❤️ by [Your Name/GitHub Username]
+Developed with ❤️ by GeorgeEipa
