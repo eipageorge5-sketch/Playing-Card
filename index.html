@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playing Card Deck</title>
-   
+    <title>High-Low Card Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="controls">
-        <h1>Digital Deck</h1>
-        <button id="shuffle-btn" onclick="resetGame()">Shuffle & Reset</button>
-        <button id="draw-btn" onclick="drawCard()">Draw Card</button>
-        <p>Cards Left: <span id="card-count">52</span></p>
-    </div>
+    <div class="game-container">
+        <h1>Higher or Lower?</h1>
+        <div class="stats">
+            <p>Score: <span id="score">0</span></p>
+            <p>Cards Left: <span id="cards-left">52</span></p>
+        </div>
 
-    <div id="deck-container" class="deck-container"></div>
-    
-    <script src="./script.js"></script>
+        <div id="card-display" class="card">?</div>
+
+        <div class="controls">
+            <button onclick="makeGuess('higher')">Higher ↑</button>
+            <button onclick="makeGuess('lower')">Lower ↓</button>
+            <button id="reset-btn" onclick="resetGame()">Shuffle & Reset</button>
+        </div>
+        
+        <p id="message">Draw a card to start!</p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
