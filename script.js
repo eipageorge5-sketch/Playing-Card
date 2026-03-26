@@ -65,3 +65,5 @@ function resetGame() {
 
 // Initialize the game on load
 resetGame();
+document.getElementById('draw-btn').addEventListener('click', drawCard);
+document.getElementById('shuffle-btn').addEventListener('click', resetGame);
