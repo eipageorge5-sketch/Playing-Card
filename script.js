@@ -6,6 +6,7 @@ function drawCard() {
         { name: 'clubs', symbol: '♣️' }
     ];
     const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    let deck = [];
 
     const randomSuit = suits[Math.floor(Math.random() * suits.length)];
     const randomRank = ranks[Math.floor(Math.random() * ranks.length)];
