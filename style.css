@@ -8,6 +8,27 @@ body {
     height: 100vh;
     margin: 0;
 }
+/* Animation for a correct guess */
+.correct-pop {
+    animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); border-color: #2ecc71; }
+    100% { transform: scale(1); }
+}
+
+/* Animation for a wrong guess */
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); border-color: #e74c3c; }
+    75% { transform: translateX(10px); }
+}
 
 .game-container {
     text-align: center;
