@@ -1,1 +1,44 @@
+body {
+    background-color: #1a472a; /* Poker table green */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+}
 
+.deck-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 150px;
+    height: 220px;
+    background: white;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* Suit Color Logic */
+.card.hearts, .card.diamonds { color: #d63031; }
+.card.spades, .card.clubs { color: #2d3436; }
+
+.rank { font-size: 1.5rem; font-weight: bold; }
+.suit-center { font-size: 4rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+#draw-btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background: #f1c40f;
+    border: none;
+    border-radius: 5px;
+}
