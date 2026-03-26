@@ -1,95 +1,71 @@
-// 1. Game State
 let deck = [];
 let currentCard = null;
 let score = 0;
+let highScore = localStorage.getItem('highScore') || 0;
 
 const suits = ['♥️', '♦️', '♣️', '♠️'];
 const values = [
-    { name: 'A', value: 14 },
-    { name: '2', value: 2 },
-    { name: '3', value: 3 },
-    { name: '4', value: 4 },
-    { name: '5', value: 5 },
-    { name: '6', value: 6 },
-    { name: '7', value: 7 },
-    { name: '8', value: 8 },
-    { name: '9', value: 9 },
-    { name: '10', value: 10 },
-    { name: 'J', value: 11 },
-    { name: 'Q', value: 12 },
-    { name: 'K', value: 13 }
+    { name: 'A', val: 14 }, { name: '2', val: 2 }, { name: '3', val: 3 },
+    { name: '4', val: 4 }, { name: '5', val: 5 }, { name: '6', val: 6 },
+    { name: '7', val: 7 }, { name: '8', val: 8 }, { name: '9', val: 9 },
+    { name: '10', val: 10 }, { name: 'J', val: 11 }, { name: 'Q', val: 12 }, { name: 'K', val: 13 }
 ];
 
-// 2. Initialize Game
-function createDeck() {
+function resetGame() {
+    score = 0;
     deck = [];
-    for (let suit of suits) {
-        for (let val of values) {
-            deck.push({ ...val, suit: suit });
-        }
-    }
-}
-
-function shuffleDeck() {
+    suits.forEach(s => values.forEach(v => deck.push({...v, suit: s})));
+    
+    // Fisher-Yates Shuffle
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
     }
+
+    currentCard = deck.pop();
+    updateUI();
+    document.getElementById('message').textContent = "New deck! Higher or Lower?";
 }
 
-function updateUI(card) {
+function updateUI() {
     const display = document.getElementById('card-display');
-    display.textContent = `${card.name}${card.suit}`;
+    display.textContent = `${currentCard.name}${currentCard.suit}`;
+    display.style.color = (currentCard.suit === '♥️' || currentCard.suit === '♦️') ? 'red' : 'black';
     
-    // Make Hearts and Diamonds RED
-    if (card.suit === '♥️' || card.suit === '♦️') {
-        display.style.color = 'red';
-    } else {
-        display.style.color = 'black';
-    }
-
     document.getElementById('score').textContent = score;
+    document.getElementById('high-score').textContent = highScore;
     document.getElementById('cards-left').textContent = deck.length;
 }
 
-// 3. Game Logic
 function makeGuess(guess) {
-    if (deck.length === 0) {
-        document.getElementById('message').textContent = "Game Over! Press Reset.";
-        return;
-    }
+    if (deck.length === 0) return;
 
     const nextCard = deck.pop();
-    const messageEl = document.getElementById('message');
+    const display = document.getElementById('card-display');
+    const msg = document.getElementById('message');
 
-    if (
-        (guess === 'higher' && nextCard.value > currentCard.value) ||
-        (guess === 'lower' && nextCard.value < currentCard.value)
-    ) {
+    display.classList.remove('correct-pop', 'shake');
+    void display.offsetWidth; // Reset animation
+
+    if ((guess === 'higher' && nextCard.val > currentCard.val) || 
+        (guess === 'lower' && nextCard.val < currentCard.val)) {
         score++;
-        messageEl.textContent = "Correct! 🎉";
-        messageEl.style.color = "#2ecc71"; // Green
-    } else if (nextCard.value === currentCard.value) {
-        messageEl.textContent = "It's a tie! No points.";
-        messageEl.style.color = "#f1c40f"; // Yellow
+        display.classList.add('correct-pop');
+        msg.textContent = "Correct! 🎉";
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('highScore', highScore);
+        }
+    } else if (nextCard.val === currentCard.val) {
+        msg.textContent = "Tie! No points.";
     } else {
-        messageEl.textContent = "Wrong! Better luck next time.";
-        messageEl.style.color = "#e74c3c"; // Red
+        display.classList.add('shake');
+        msg.textContent = "Wrong! Game Over.";
+        // score = 0; // Uncomment to reset score on mistake
     }
 
     currentCard = nextCard;
-    updateUI(currentCard);
+    updateUI();
 }
 
-function resetGame() {
-    score = 0;
-    createDeck();
-    shuffleDeck();
-    currentCard = deck.pop();
-    updateUI(currentCard);
-    document.getElementById('message').textContent = "New deck shuffled! Make your guess.";
-    document.getElementById('message').style.color = "white";
-}
-
-// Start the game on load
-resetGame();
+resetGame(); // Start first game
