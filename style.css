@@ -42,3 +42,7 @@ body {
     border: none;
     border-radius: 5px;
 }
+#draw-btn:hover {
+    background: #f39c12;
+    transform: scale(1.05);
+    }
